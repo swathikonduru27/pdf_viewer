@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Viewer</title>
+</head>
+<body>
+    <h1>Upload PDF File</h1>
+    <form id="pdfForm" enctype="multipart/form-data">
+        <input type="file" id="pdfInput" name="pdfFile">
+        <input type="submit" value="Submit">
+    </form>
+    <div id="previewContainer"></div>
+
+    <script>
+        // JavaScript code to handle file selection and display preview
+        document.getElementById('pdfInput').addEventListener('change', function(event) {
+            var file = event.target.files[0];
+            var reader = new FileReader();
+
+            reader.onload = function(event) {
+                var preview = document.createElement('embed');
+                preview.setAttribute('width', '500');
+                preview.setAttribute('height', '600');
+                preview.setAttribute('src', event.target.result);
+                document.getElementById('previewContainer').innerHTML = '';
+                document.getElementById('previewContainer').appendChild(preview);
+            };
+
+            reader.readAsDataURL(file);
+        });
+    </script>
+</body>
+</html>
